@@ -6,7 +6,6 @@ on:
 jobs:
   # Run tests with pytest.
   Tests:
-    needs: [Linter]
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
