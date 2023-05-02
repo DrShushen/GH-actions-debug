@@ -1,0 +1,26 @@
+name: Test catboost 1.2 installation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  # Run tests with pytest.
+  Tests:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        python-version: ["3.8"]
+        os: [macos-latest]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: "pip" # Caching pip dependencies.
+      - name: Attempt to install catboost
+        run: |
+          pip install --upgrade pip
+          pip install "catboost>=1.2"
